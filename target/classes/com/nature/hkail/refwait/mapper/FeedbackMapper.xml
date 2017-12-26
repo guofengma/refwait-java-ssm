@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!-- 意见反馈信息Mapper映射文件 -->
+<mapper namespace="com.nature.hkail.refwait.dao.FeedbackDao">
+    <!-- 基本的resultMap -->
+    <resultMap type="feedback" id="baseFeedbackMap">
+        <id column="id" property="id" jdbcType="BIGINT" javaType="Long"/>
+        <result column="content" property="content" jdbcType="VARCHAR" javaType="String"/>
+        <result column="feedbacker_type" property="feedbackerType" jdbcType="TINYINT" javaType="Integer"/>
+        <result column="feedbacker_id" property="feedbackerId" jdbcType="BIGINT" javaType="Long"/>
+        <result column="is_read" property="read" jdbcType="TINYINT" javaType="Integer"/>
+        <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP" javaType="String"/>
+        <result column="gmt_modified" property="gmtModified" jdbcType="TIMESTAMP" javaType="String"/>
+    </resultMap>
+    
+    <!-- 基本的字段SQL -->
+    <sql id="baseFeedbackSQL">
+        `id`, `content`, `feedbacker_type`, `feedbacker_id`, `is_read` AS `read`, `gmt_create` AS `gmtCreate`, `gmt_modified` AS `gmtModified`
+    </sql>
+    
+    <!-- 不包含ID的字段SQL -->
+    <sql id="noIdFeedbackSQL">
+        `content`, `feedbacker_type`, `feedbacker_id`, `is_read` AS `read`, `gmt_create` AS `gmtCreate`, `gmt_modified` AS `gmtModified`
+    </sql>
+    
+    <!-- 插入新意见反馈信息 -->
+    <insert id="insertNewFeedback" parameterType="feedback">
+        INSERT INTO
+        `rw_feedback`(`content`, `feedbacker_type`, `feedbacker_id`, `gmt_create`, `gmt_modified`)
+        VALUES(#{content}, #{feedbackerType}, #{feedbackerId}, NOW(), NOW())
+    </insert>
+</mapper>

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!-- 顾客信息Mapper映射文件 -->
+<mapper namespace="com.nature.hkail.refwait.dao.CustomerDao">
+    <!-- 基本的resultMap -->
+    <resultMap id="baseCustomerMap" type="customer">
+        <id column="id" property="id" jdbcType="BIGINT" javaType="Long"/>
+        <result column="openid" property="openid" jdbcType="VARCHAR" javaType="String"/>
+        <result column="name" property="name" jdbcType="VARCHAR" javaType="String"/>
+        <result column="sex" property="sex" jdbcType="TINYINT" javaType="Integer"/>
+        <result column="mobile_phone" property="mobilePhone" jdbcType="VARCHAR" javaType="String"/>
+        <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP" javaType="String"/>
+        <result column="gmt_modified" property="gmtModified" jdbcType="TIMESTAMP" javaType="String"/>
+    </resultMap>
+
+    <!-- 基本的字段SQL -->
+    <sql id="baseCustomerSQL">
+        `id`, `openid`, `name`, `sex`, `mobile_phone` as `mobilePhone`, `gmt_create` as gmtCreate, `gmt_modified` as gmtModified
+    </sql>
+    
+    <!-- 不包括ID的字段SQL -->
+    <sql id="noIdCustomerSQL">
+        `openid`, `name`, `sex`, `mobile_phone` as `mobilePhone`, `gmt_create` as gmtCreate, `gmt_modified` as gmtModified
+    </sql>
+
+    <!-- 查询所有顾客信息 -->
+    <select id="selectAllCustomer" resultMap="baseCustomerMap">
+        SELECT
+        <include refid="baseCustomerSQL"/>
+        FROM
+        `rw_customer`
+    </select>
+
+    <!-- 根据顾客ID查询顾客信息 -->
+    <select id="selectCustomerById" resultType="customer" parameterType="Long">
+        SELECT
+        <include refid="baseCustomerSQL"/>
+        FROM
+        `rw_customer`
+        WHERE
+        `id` = #{id}
+    </select>
+
+    <!-- 根据顾客OPENID查询顾客信息 -->
+    <select id="selectCustomerByOpenid" resultType="customer" parameterType="String">
+        SELECT
+        <include refid="baseCustomerSQL"/>
+        FROM
+        `rw_customer`
+        WHERE
+        `openid` = #{openid}
+    </select>
+
+    <!-- 根据手机号查询顾客信息数量 -->
+    <select id="selectTotalOfCustomer" resultType="Integer" parameterType="String">
+        SELECT
+        COUNT(`id`)
+        FROM
+        `rw_customer`
+        WHERE
+        `mobile_phone` = #{mobilePhone}
+    </select>
+
+    <!-- 插入新顾客 -->
+    <insert id="insertNewCustomer" parameterType="customer" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO
+        `rw_customer` (`openid`, `name`, `sex`, `mobile_phone`, `gmt_create`, `gmt_modified`)
+        VALUES (#{openid}, #{name}, #{sex}, #{mobilePhone}, NOW(), NOW())
+    </insert>
+
+    <!-- 根据顾客ID更新顾客姓名 -->
+    <update id="updateCustomerSetNameById">
+        UPDATE
+        `rw_customer`
+        SET
+        `name` = #{name},
+        `gmt_modified` = NOW()
+        WHERE
+        `id` = #{id}
+    </update>
+    
+    <!-- 根据顾客ID更新顾客性别 -->
+    <update id="updateCustomerSetSexById">
+        UPDATE
+        `rw_customer`
+        SET
+        `sex` = #{sex},
+        `gmt_modified` = NOW()
+        WHERE
+        `id` = #{id}
+    </update>
+    
+    <!-- 根据顾客ID更新顾客手机号 -->
+    <update id="updateCustomerSetPhoneById">
+        UPDATE
+        `rw_customer`
+        SET
+        `mobile_phone` = #{mobilePhone},
+        `gmt_modified` = NOW()
+        WHERE
+        `id` = #{id}
+    </update>
+</mapper>
