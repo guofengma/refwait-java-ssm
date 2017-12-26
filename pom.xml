@@ -187,6 +187,14 @@
       <artifactId>commons-codec</artifactId>
       <version>1.9</version>
     </dependency>
+
+    <!-- 用于上传文件至FTP -->
+    <dependency>
+      <groupId>com.jcraft</groupId>
+      <artifactId>jsch</artifactId>
+      <version>0.1.54</version>
+    </dependency>
+
   </dependencies>
 
   <build>

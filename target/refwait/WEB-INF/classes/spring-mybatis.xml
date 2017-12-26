@@ -16,6 +16,7 @@
             <list>
                 <value>classpath:jdbc.properties</value>
                 <value>classpath:wechat.properties</value>
+                <value>classpath:sftp.properties</value>
             </list>
         </property>
         <property name="fileEncoding" value="UTF-8"/>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!-- 商家信息Mapper映射文件 -->
+<mapper namespace="com.nature.hkail.refwait.dao.MerchantDao">
+    <!-- 基本的resultMap -->
+    <resultMap id="baseMerchantMap" type="merchant">
+        <id column="id" property="id" jdbcType="BIGINT" javaType="Long"/>
+        <result column="openid" property="openid" jdbcType="VARCHAR" javaType="String"/>
+        <result column="name" property="name" jdbcType="VARCHAR" javaType="String"/>
+        <result column="telephone" property="telephone" jdbcType="VARCHAR" javaType="String"/>
+        <result column="mobile_phone" property="mobilePhone" jdbcType="VARCHAR" javaType="String"/>
+        <result column="address" property="address" jdbcType="VARCHAR" javaType="String"/>
+        <result column="longitude" property="longitude" jdbcType="DECIMAL" javaType="Double"/>
+        <result column="latitude" property="latitude" jdbcType="DECIMAL" javaType="Double"/>
+        <result column="status" property="status" jdbcType="TINYINT" javaType="Integer"/>
+        <result column="notice" property="notice" jdbcType="VARCHAR" javaType="String"/>
+        <result column="icon_url" property="iconUrl" jdbcType="VARCHAR" javaType="String"/>
+        <result column="heat_value" property="heatValue" jdbcType="INTEGER" javaType="Integer"/>
+        <result column="is_qualified" property="isQualified" jdbcType="TINYINT" javaType="Integer"/>
+        <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP" javaType="String"/>
+        <result column="gmt_modified" property="gmtModified" jdbcType="TIMESTAMP" javaType="String"/>
+    </resultMap>
+
+    <!-- 基本的字段SQL -->
+    <sql id="baseMerchantSQL">
+        `id`, `openid`, `name`, `telephone`, `mobile_phone`, `address`, `longitude`, `latitude`, `status`, `notice`, `icon_url`, `heat_value`, `is_qualified`, `gmt_create`, `gmt_modified`
+    </sql>
+
+    <!-- 不包含ID的SQL -->
+    <sql id="noIdMerchantSQl">
+        `openid`, `name`, `telephone`, `mobile_phone`, `address`, `longitude`, `latitude`, `status`, `notice`, `icon_url`, `heat_value`, `is_qualified`, `gmt_create`, `gmt_modified`
+    </sql>
+
+    <!-- 插入新商家信息 -->
+    <insert id="insertNewMerchant" parameterType="merchant" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO
+        `rw_merchant` (`openid`, `name`,<if test="telephone != null"> `telephone`,</if> `mobile_phone`, `address`, `longitude`, `latitude`, `icon_url`, `gmt_create`, `gmt_modified`)
+        VALUES (#{openid}, #{name},<if test="telephone != null"> #{telephone},</if> #{mobilePhone}, #{address}, #{longitude}, #{latitude}, #{iconUrl}, NOW(), NOW())
+    </insert>
+</mapper>
