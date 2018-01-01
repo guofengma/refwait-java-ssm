@@ -6,14 +6,26 @@ import com.nature.hkail.refwait.test.BaseTest;
 import org.junit.Test;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
- * 商家信息DAO事务处理测试类
+ * @author HuangKailie
+ * @className MerchantDaoTest
+ * @date 2017-12-30 10:36:36
+ * @description 顾客DAO事务处理测试类
  */
 public class MerchantDaoTest extends BaseTest {
 
     @Resource
     private MerchantDao merchantDao;
+
+    @Test
+    public void testSelectAllMerchants() {
+        List<Merchant> merchants = merchantDao.selectAllMerchantsByQual(1);
+        for (Merchant merchant:merchants) {
+            System.out.println(merchant.toString());
+        }
+    }
 
     @Test
     public void testInsertNewMerchant() {

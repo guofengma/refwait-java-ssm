@@ -11,7 +11,7 @@ import java.io.Serializable;
 public class Feedback implements Serializable {
 
 	// 序列化ID号
-	private static final long serialVersionUID = 6991042436707658877L;
+	private static final long serialVersionUID = -6403369815209112726L;
 	// 意见反馈ID号
 	private Long id;
 	// 反馈内容

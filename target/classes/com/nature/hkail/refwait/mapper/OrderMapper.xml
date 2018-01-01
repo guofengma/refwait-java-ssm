@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!-- 订单信息Mapper映射文件 -->
+<mapper namespace="com.nature.hkail.refwait.dao.OrderDao">
+    <!-- 基本的resultMap -->
+    <resultMap id="baseOrderMap" type="order">
+        <id column="id" property="id" jdbcType="BIGINT" javaType="Long"/>
+        <result column="customer_id" property="customerId" jdbcType="BIGINT" javaType="Long"/>
+        <result column="merchant_id" property="customerId" jdbcType="BIGINT" javaType="Long"/>
+        <result column="details" property="details" jdbcType="VARCHAR" javaType="String"/>
+        <result column="remark" property="remark" jdbcType="VARCHAR" javaType="String"/>
+        <result column="status" property="status" jdbcType="TINYINT" javaType="Integer"/>
+        <result column="discount" property="discount" jdbcType="DECIMAL" javaType="Double"/>
+        <result column="number_of_people" property="numberOfPeople" jdbcType="INTEGER" javaType="Integer"/>
+        <result column="catering_price" property="cateringPrice" jdbcType="DECIMAL" javaType="Double"/>
+        <result column="tables_info" property="tablesInfo" jdbcType="VARCHAR" javaType="String"/>
+        <result column="total_price" property="totalPrice" jdbcType="DECIMAL" javaType="Double"/>
+        <result column="is_evaluation" property="evaluation" jdbcType="TINYINT" javaType="Integer"/>
+        <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP" javaType="String"/>
+        <result column="gmt_modified" property="gmtModified" jdbcType="TIMESTAMP" javaType="String"/>
+    </resultMap>
+
+    <!-- 基本的字段SQL -->
+    <sql id="baseOrderSQL">
+        `id`, `customer_id`, `merchant_id`, `details`, `remark`, `status`, `discount`, `number_of_people`, `catering_price`, `tables_info`, `total_price`, `is_evaluation`, `gmt_create`, `gmt_modified`
+    </sql>
+
+    <!-- 不包含ID的字段SQL -->
+    <sql id="noIdOrderSQL">
+        `customer_id`, `merchant_id`, `details`, `remark`, `status`, `discount`, `number_of_people`, `catering_price`, `tables_info`, `total_price`, `is_evaluation`, `gmt_create`, `gmt_modified`
+    </sql>
+
+    <!-- 根据商家ID以及订单状态查询订单数量 -->
+    <select id="selectNumberOfOrdersByMerchantIdAndStatus" resultType="Integer">
+        SELECT
+        COUNT(`id`)
+        FROM
+        `rw_order`
+        WHERE
+        `merchant_id` = #{merchantId}
+        AND
+        `status` = #{status}
+    </select>
+</mapper>

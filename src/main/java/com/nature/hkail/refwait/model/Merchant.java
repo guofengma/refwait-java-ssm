@@ -34,14 +34,18 @@ public class Merchant implements Serializable {
     private String notice;
     // 图标URL地址
     private String iconUrl;
-    // 热度
-    private Integer heatValue;
+    // 星值，1~5
+    private Integer starValue;
+    // 人均消费
+    private Double priceOfAvg;
     // 是否合格，0：不合格，1：合格，3：审核中
     private Integer qualified;
     // 创建时间
     private String gmtCreate;
     // 修改时间
     private String gmtModified;
+    // 与顾客相距距离
+    private Double distance;
 
     @Override
     public String toString() {
@@ -57,10 +61,12 @@ public class Merchant implements Serializable {
                 ", status=" + status +
                 ", notice='" + notice + '\'' +
                 ", iconUrl='" + iconUrl + '\'' +
-                ", heatValue=" + heatValue +
+                ", starValue=" + starValue +
+                ", priceOfAvg=" + priceOfAvg +
                 ", qualified=" + qualified +
                 ", gmtCreate='" + gmtCreate + '\'' +
                 ", gmtModified='" + gmtModified + '\'' +
+                ", distance=" + distance +
                 '}';
     }
 
@@ -152,12 +158,20 @@ public class Merchant implements Serializable {
         this.iconUrl = iconUrl;
     }
 
-    public Integer getHeatValue() {
-        return heatValue;
+    public Integer getStarValue() {
+        return starValue;
     }
 
-    public void setHeatValue(Integer heatValue) {
-        this.heatValue = heatValue;
+    public void setStarValue(Integer starValue) {
+        this.starValue = starValue;
+    }
+
+    public Double getPriceOfAvg() {
+        return priceOfAvg;
+    }
+
+    public void setPriceOfAvg(Double priceOfAvg) {
+        this.priceOfAvg = priceOfAvg;
     }
 
     public Integer getQualified() {
@@ -173,7 +187,7 @@ public class Merchant implements Serializable {
     }
 
     public void setGmtCreate(String gmtCreate) {
-        this.gmtCreate = gmtCreate;
+        this.gmtCreate = gmtCreate.substring(0, gmtCreate.indexOf('.'));
     }
 
     public String getGmtModified() {
@@ -181,6 +195,14 @@ public class Merchant implements Serializable {
     }
 
     public void setGmtModified(String gmtModified) {
-        this.gmtModified = gmtModified;
+        this.gmtModified = gmtModified.substring(0, gmtModified.indexOf('.'));
+    }
+
+    public Double getDistance() {
+        return distance;
+    }
+
+    public void setDistance(Double distance) {
+        this.distance = distance;
     }
 }

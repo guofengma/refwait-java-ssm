@@ -15,7 +15,7 @@ import com.jcraft.jsch.Session;
 /**
  * @author HuangKailie
  * @className JSchUtil
- * @date 2017年12月26日12:19:34
+ * @date 2017-12-26 12:19:34
  * @description SFTP文件上传工具类
  */
 @Component

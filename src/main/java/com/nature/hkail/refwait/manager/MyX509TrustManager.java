@@ -13,7 +13,8 @@ import java.security.cert.X509Certificate;
 public class MyX509TrustManager implements X509TrustManager {
 
     /**
-     * 检查客户端证书
+     * @date 2017-12-19 15:17:59
+     * @description 检查客户端证书
      * @param x509Certificates
      * @param s
      * @throws CertificateException
@@ -23,7 +24,8 @@ public class MyX509TrustManager implements X509TrustManager {
     }
 
     /**
-     * 检查服务器证书
+     * @date 2017-12-19 15:17:59
+     * @description 检查服务器证书
      * @param x509Certificates
      * @param s
      * @throws CertificateException
@@ -33,8 +35,9 @@ public class MyX509TrustManager implements X509TrustManager {
     }
 
     /**
-     * 返回受信任的X509证书数组
-     * @return
+     * @date 2017-12-19 15:17:59
+     * @description 返回受信任的X509证书数组
+     * @return X509Certificate[]
      */
     public X509Certificate[] getAcceptedIssuers() {
         return new X509Certificate[0];
